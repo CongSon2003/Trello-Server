@@ -1,0 +1,15 @@
+{
+  "name": "trello-server",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "This is Trello-Server ",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "CongSon2003",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
