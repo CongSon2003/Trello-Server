@@ -1,0 +1,9 @@
++, cors : (Cross origin Rescourses Sharing ) là một cơ chế cho phép nhiều tài nguyên khác nhau (font,javaScript,v..v)
+    của một trang web có thể được truy cập từ domain khác với domain cảu trang đó.
++, Controllers : Để xử lý các điều hướng router => server  
++, provider : Để xử lý code của bên thứ 3 (email, xác thực, clound,...)
++, router : tuyến đường của server
++, services : Là nơi xử lý logic phức tạ
++, sockets : xử lý realtime , thông báo
++, utils : thuật toán, phân trang, biến tĩnh, hàng số, sắp xếp
++, validations : sát thực data
