@@ -20,7 +20,7 @@ module.exports = {
 
   rules: {
     // Common
-    'no-console': 1, // không cho phép console.log
+    'no-console': 0, // không cho phép console.log
     'no-extra-boolean-cast': 0,
     'no-lonely-if': 1,
     'no-unused-vars': 1, // cảnh báo khi khai báo biến nhưng không sử dụng
