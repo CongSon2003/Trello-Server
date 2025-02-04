@@ -1,5 +1,5 @@
 +, cors : (Cross origin Rescourses Sharing ) là một cơ chế cho phép nhiều tài nguyên khác nhau (font,javaScript,v..v)
-    của một trang web có thể được truy cập từ domain khác với domain cảu trang đó.
+    của một trang web có thể được truy cập từ domain khác với domain của trang đó.
 +, Controllers : Để xử lý các điều hướng router => server  
 +, provider : Để xử lý code của bên thứ 3 (email, xác thực, clound,...)
 +, router : tuyến đường của server
@@ -7,3 +7,54 @@
 +, sockets : xử lý realtime , thông báo
 +, utils : thuật toán, phân trang, biến tĩnh, hàng số, sắp xếp
 +, validations : sát thực data
+
+// BABEL : https://trungquandev.com/cau-hinh-babel-cho-mot-du-an-nodejs-thuan-javascript/
++, BABEL : là công cụ chuyển đổi mã nguồn trong javaScript, cho phép các nhà phát triển sử dụng các tính
+    năng mới nhất của ngôn ngữ mà vẫn đạm bảo mã nguồn có thể chạy trên các trình duyệt hoặc môi trường
+    không hộ trợ tính năng đó.
+    => Babel là một trình biên dịch mã Javascript.
+    
+    -, @babel/core : Gói cơ bản của babel, dùng để chạy bất kỳ thiết lập / cấu hình của babel.
+    -, @babel/cli : sử dụng biên dịch các file từ dòng lệnh
+    -, @babel/node : là một CLI tưowng tự Node CLI, sử dụng để biên dịch tương thích với các cài đặt của
+        Babel preset và Babel Plugins
+    -, @babel/preset-env : là một smart preset tự động sử dụng phiên bản javasript mới nhất mà không cần 
+        phải khai báo cụ thể từng phiển bản một.
+    -, @babel/plugin-transform-runtime : Plugin này cho phép tái sử dụng lại code của chính nó để giảm kích
+        thước code.
+    -, @babel/runtime : Theo như tài liệu của Babel: thì gói này nên được install ở dependencies thay vì
+        devDependencies vì nó sẽ phụ thuộc vào code sau khi đã triển khai xong.
+        Tác dụng của nó là để tái sử dụng lại code hay cũng có thể hiểu là để tránh trùng lặp code sau khi đã build xong hết code ở production,
+        bởi vì đôi khi Babel sẽ biên dịch ra các mã code giống nhau giữa các files
+ 
++ , relative import và absolute import : package : "module-resolver" : "module-resolver", { "alias": { "~": "./src" } }
+    -, Relative import : import { CongSon2003 } from '../../../../../../../../CongSon2003.js'
+    -, absolute import : import { CongSon2003 } from '@src/module/CongSon2003.js'
++, build/src : là thu mục production để deploy
++, "clean": "rm -rf build && mkdir build", // Xóa build và tạo mới thư mục build
+    "build-babel": "babel ./src -d ./build/src", // tạo thư mục build với dự liệu như dev để preview.
+    "build": "npm run clean && npm run build-babel", // Xóa build và tạo mới thư mục build &&  tạo thư mục build với dự liệu như dev để preview.
+    "production": "npm run build && node ./build/src/server.js", Xóa build và tạo mới thư mục build &&  tạo thư mục build với dự liệu như dev để preview && chạy production trong build
+    "dev": "nodemon --exec babel-node ./src/server.js" // chạy dự án trong dev 
+
++, file : jsconfig.json : trong một thư mục cho biết thư mục đó là thư mục gốc của dự án javasript.
+    tệp jsconfig.json chỉ định các tệp gốc và các tùy chọn cho các tính năng được cung cấp.
+
++, Mongoose : là một Object Data Modeling (ODM) là thư viện cho javaScript để làm việc với MongoDB trong môi trường NodeJs
++, MongoDB : là một cơ sở dữ liệu NoSql, non-relational, có tính năng lưu trữ dự liệu theo định dạnng Json, hoặc đa dạng
++, MongoDB là cơ sở dữ liệu NoSQL thực sự, nơi dữ liệu được lưu trữ.
++, Mongoose là một thư viện mà bạn có thể sử dụng trong Node.js để giao tiếp với MongoDB, cung cấp các công cụ để dễ dàng tương tác và quản lý dữ liệu.
++, Populate và Lookup (Aggregation : tổng hợp) : lấy dữ liệu tham chiếu (join)
++, So sánh Mongoose Populate và MongoDB Lookup:
+
+    -, Mongoose Populate: Dùng trong Mongoose, giúp đơn giản hóa việc lấy dữ liệu từ các tài liệu có quan hệ.
+    Dễ sử dụng và trực quan hơn với các thuật ngữ quen thuộc trong Mongoose.
+    Thích hợp cho các ứng dụng có quy mô nhỏ đến trung bình với mối quan hệ đơn giản.
+    MongoDB Lookup:
+
+    - MongoDB Lookup: Là một phần của Aggregation Framework, rất mạnh mẽ nhưng cũng phức tạp hơn một chút trong cú pháp.
+    Hỗ trợ nhiều loại truy vấn phức tạp hơn, bao gồm các cụm từ và toán tử bổ sung.
+    Thích hợp cho các ứng dụng lớn hoặc khi bạn cần thực hiện nhiều phép nối.
++, MongoDB Node.js Driver : là một thư viện cho phép bạn tương tác với cơ sở dự liệu MongoDB từ ứng dụng Node.js.
+    => nó cung cấp một API đơn giản và hiệu quả để thực hiện các thao tác cơ bản trên MongoDB(CRUD)
++, 
