@@ -57,4 +57,45 @@
     Thích hợp cho các ứng dụng lớn hoặc khi bạn cần thực hiện nhiều phép nối.
 +, MongoDB Node.js Driver : là một thư viện cho phép bạn tương tác với cơ sở dự liệu MongoDB từ ứng dụng Node.js.
     => nó cung cấp một API đơn giản và hiệu quả để thực hiện các thao tác cơ bản trên MongoDB(CRUD)
-+, 
++, "async-exit-hook" :  (Run some code when the process exits) : Giúp bạn thực hiện các hàm rọn dẹp bất đồng bộ
+    - , Khi ứng dụng nhận được tín hiệu dừng (exit signals) : SIGINT (nhấn CTRL + C) hoặc SIGTERM (Container)
+    -, Thư viện này cho phép bạn chờ đợi các tác vụ bất đồng bộ hoàn thành trước khi thoát khỏi ứng dụng
+    -, Tốt , và hữu ích trong việc dọn dẹp như đóng kết nối cơ sở dữ liệu, gửi thông điệp ra ngoài. v.v
+
++,export const <name_funtion> : import { <name_funtion> } from "..." => object destructering javaScript
++,export default <name_funtion> : import <name_funtion> from "..." =>  default 
+
++, REST API : (Representational State Transfer Application Programming interface) : 
+ => Dử dụng giao thức HTTP và thường được áp dụng giao tiếp giữa client và server
+
++, Router.route() : là một phương thức của đối tướng Router cho phép bạn định nghĩa nhiều thương thức cho cùng một route
+    => sạch hơn, gọn hơn
+
++, Joi là một thư viện trong JavaScript được sử dụng để xác thực dữ liệu, 
++, body-parser : là một middleware trong nodejs sử dụng với expressjs
+    => giúp phân tích (parse) các dữ liệu trong body của HTTP request
+    +, Phân tích dữ liệu JSON,
+    +, Phân tích dữ liệu thông qua form HTML 
+    +, Kiểu khác như Text/plain,
+
+
++, req.body : là một thuộc tính trong đối tướng "red" trong expressjs.
+    -, Được sử dụng để chứa dữ liệu mà client gửi đến server trong phần "body" của HTTP Request.
+    -, Thường được sử dụng trong các request : POST, PUT, PATCH , nơi mà thông tin cần gửi từ client đến server
++, req.query : là một thuộc tính trong đối tượng "red" trong expressjs.
+    -, Được sử dụng để truy cập các tham số truy vấn (query parameters) trong URL của một yêu cầu HTTP.
+    -, Tham số truy vấn là những phần tử của URL được gán sau dấu "?"
+    -, Thường được sử dụng để gửi dữ liệu từ client đến server mà không cần sử dụng body của yêu cầu
+    vd : /user?id=1
++, req.params : là một thuộc tính trong đối tượng "red" trong expressjs.
+    -, Được sử dụng để truy cập các tham số được xác định trong đường dẫn (path) của URL.
+    -, Các tham số này thường được sử dụng để truy xuất thông tin cụ thể từ đường dẫn, ví dụ như ID của một tài nguyên trong một ứng dụng RESTful.
+    vd : /user/:id
++, req.cookies : Được sử dụng để truy cấp các cookie mà client gửi đến server, cần sử dụng ,middleware như cookie-parser
++, req.files : Được sử dụng để truy cập các tệp tải lên khi người dùng gửi tệp từ client đến server.
+    -, thông qua middleware như multer.
+
+
++, Controller : là nơi giao chuyển dữ liệu, điều hướng dữ liệu , bộ điều khiển 
+    -, là nơi nhận data sau khi validations
+    -, Điều hướng dữ liệu sang service

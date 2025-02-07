@@ -1,5 +1,14 @@
-/**
- * Updated by trungquandev.com's author on August 17 2023
- * YouTube: https://youtube.com/@trungquandev
- * "A bit of fragrance clings to the hand that gives flowers!"
- */
+import express from 'express';
+import { StatusCodes } from 'http-status-codes';
+import RouterBoard from '~/routes/v1/boardRoute';
+const Router = express.Router();
+
+// Check APIs v1/Status :
+Router.get('/status', ( req, res) => {
+  res.status(StatusCodes.OK).json({ message : "This is API Status!", StatusCode : StatusCodes.OK })
+})
+
+// API Board :
+Router.use('/boards', RouterBoard)
+
+module.exports = Router
