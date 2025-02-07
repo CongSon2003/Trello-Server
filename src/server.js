@@ -1,38 +1,51 @@
-/* eslint-disable no-console */
 import express from "express";
 // import { mapOrder } from "~/utils/sorts.js";
 // connect Database :
-import { connectToCluster, GET_DB } from "~/config/mongodb";
+import { connectToCluster, STOP_DB } from "~/config/mongodb";
+import { env } from "~/config/environment";
+import exitHook from "async-exit-hook";
+import status from "~/routes/v1/index";
+import bodyParser from "body-parser";
+import { StatusCodes } from "http-status-codes";
 const APP_SERVER = () => {
   const app = express();
-  const hostname = "localhost";
-  const port = 8017;
-  app.get("/", async (req, res) => {
-    console.log(await GET_DB().listCollections().toArray());
-    res.end("<h1>Hello World!</h1><hr>");
-  });
-  app.listen(port, hostname, () => {
-    // eslint-disable-next-line no-console
+
+  // parse application/x-www-form-urlencoded
+  app.use(bodyParser.urlencoded({ extended: false }));
+
+  // parse application/JSON
+  app.use(bodyParser.json());
+
+  // use API V1
+  app.use("/v1", status);
+
+  // Khởi động server
+  app.listen(env.APP_PORT, env.APP_HOST, () => {
+    app.use("/", (req, res) => {
+      res.send("<h1 style = 'color : red'>This is heading 1</h1>");
+    });
     console.log(
-      `3. Hello CongSon Dev, I am running at host : ${hostname}:${port}`
+      `3. Hello CongSon Dev, I am running at host : ${env.APP_HOST}:${env.APP_PORT}`
     );
   });
+
+  // Thực hiện cleanup trước khi server stop
+  exitHook(() => {
+    console.log("4. exit");
+    STOP_DB();
+  });
 };
+
 // Kiểm tra kết nối database (IIFE):
 (async () => {
   try {
     console.log("1. Connecting to MongoDB...");
     await connectToCluster();
 
-    // Run App : 
+    // Run App :
     APP_SERVER();
   } catch (error) {
     console.log(error);
     process.exit(0);
   }
-})()
-// connectToCluster()
-//   .then(() => APP_SERVER())
-//   .catch((error) => {
-//     console.log(error), process.exit(0);
-//   });
+})();
