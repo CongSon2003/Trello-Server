@@ -1,5 +1,7 @@
+/* eslint-disable no-unused-vars */
 import express from "express";
 // import { mapOrder } from "~/utils/sorts.js";
+
 // connect Database :
 import { connectToCluster, STOP_DB } from "~/config/mongodb";
 import { env } from "~/config/environment";
@@ -7,6 +9,7 @@ import exitHook from "async-exit-hook";
 import status from "~/routes/v1/index";
 import bodyParser from "body-parser";
 import { StatusCodes } from "http-status-codes";
+import { errorHandling } from "~/middlewares/ErrorHandling";
 const APP_SERVER = () => {
   const app = express();
 
@@ -18,6 +21,9 @@ const APP_SERVER = () => {
 
   // use API V1
   app.use("/v1", status);
+
+  // Middleware Error Handling
+  app.use(errorHandling);
 
   // Khởi động server
   app.listen(env.APP_PORT, env.APP_HOST, () => {
