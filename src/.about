@@ -101,12 +101,12 @@
     -, Điều hướng dữ liệu sang service
 
 
-super(message): Gọi hàm constructor của lớp cha (Error). Tham số message được truyền để thiết lập thông điệp lỗi.
-this.name = 'Api_Error': Đặt thuộc tính tên cho lỗi, giúp phân biệt lỗi API của bạn với lỗi khác trong ứng dụng.
-this.statusCode = statusCode: Gán mã trạng thái HTTP cho error. Điều này hữu ích khi gửi phản hồi cho client để biết loại lỗi xảy ra.
-Error.captureStackTrace(this, this.constructor): Dùng để tạo ra một stack trace cho error, giúp bạn dễ dàng gỡ lỗi khi gặp phải lỗi. Tham số thứ hai giúp chỉ định vị trí các dòng trong stack trace.
-Export: Cuối cùng, ApiError được xuất khẩu để có thể được sử dụng ở nơi khác trong ứng dụng.
-
 +, Môi trường Production và Dev trong dự án : 
-    -, 
+    -, Môi trường Dev : là nơi cho các nhà phát triển viết mã, kiểm tra và xây dựng ứng dụng
+        => Đây là giai đoạn đầu tiên trong quy trình phát triển phần mềm, nơi tính năng được phát triển và sửa lỗi.
+    -, Môi trường Production : la nơi ứng dụng chạy trong điện thực tế và phục vụ người dùng cuối.
+        => Đây là giai đoạn cuối cùng sau khi phát triển và kiểm thử xong.
 
++, /S: Xóa tất cả các tệp và thư mục con bên trong thư mục chỉ định.
++, /Q: Xóa mà không yêu cầu xác nhận.
+    => "clean": "rmdir /S /Q build && mkdir build",

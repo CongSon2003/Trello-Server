@@ -9,7 +9,7 @@ import exitHook from "async-exit-hook";
 import status from "~/routes/v1/index";
 import bodyParser from "body-parser";
 import { StatusCodes } from "http-status-codes";
-import { errorHandling } from "~/middlewares/ErrorHandling";
+import { errorHandling } from "~/middlewares/errorHandling";
 const APP_SERVER = () => {
   const app = express();
 
