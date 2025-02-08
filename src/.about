@@ -79,15 +79,15 @@
     +, Kiểu khác như Text/plain,
 
 
-+, req.body : là một thuộc tính trong đối tướng "red" trong expressjs.
++, req.body : là một thuộc tính trong đối tướng "req" trong expressjs.
     -, Được sử dụng để chứa dữ liệu mà client gửi đến server trong phần "body" của HTTP Request.
     -, Thường được sử dụng trong các request : POST, PUT, PATCH , nơi mà thông tin cần gửi từ client đến server
-+, req.query : là một thuộc tính trong đối tượng "red" trong expressjs.
++, req.query : là một thuộc tính trong đối tượng "req" trong expressjs.
     -, Được sử dụng để truy cập các tham số truy vấn (query parameters) trong URL của một yêu cầu HTTP.
     -, Tham số truy vấn là những phần tử của URL được gán sau dấu "?"
     -, Thường được sử dụng để gửi dữ liệu từ client đến server mà không cần sử dụng body của yêu cầu
     vd : /user?id=1
-+, req.params : là một thuộc tính trong đối tượng "red" trong expressjs.
++, req.params : là một thuộc tính trong đối tượng "req" trong expressjs.
     -, Được sử dụng để truy cập các tham số được xác định trong đường dẫn (path) của URL.
     -, Các tham số này thường được sử dụng để truy xuất thông tin cụ thể từ đường dẫn, ví dụ như ID của một tài nguyên trong một ứng dụng RESTful.
     vd : /user/:id
@@ -99,3 +99,14 @@
 +, Controller : là nơi giao chuyển dữ liệu, điều hướng dữ liệu , bộ điều khiển 
     -, là nơi nhận data sau khi validations
     -, Điều hướng dữ liệu sang service
+
+
+super(message): Gọi hàm constructor của lớp cha (Error). Tham số message được truyền để thiết lập thông điệp lỗi.
+this.name = 'Api_Error': Đặt thuộc tính tên cho lỗi, giúp phân biệt lỗi API của bạn với lỗi khác trong ứng dụng.
+this.statusCode = statusCode: Gán mã trạng thái HTTP cho error. Điều này hữu ích khi gửi phản hồi cho client để biết loại lỗi xảy ra.
+Error.captureStackTrace(this, this.constructor): Dùng để tạo ra một stack trace cho error, giúp bạn dễ dàng gỡ lỗi khi gặp phải lỗi. Tham số thứ hai giúp chỉ định vị trí các dòng trong stack trace.
+Export: Cuối cùng, ApiError được xuất khẩu để có thể được sử dụng ở nơi khác trong ứng dụng.
+
++, Môi trường Production và Dev trong dự án : 
+    -, 
+

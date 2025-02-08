@@ -1,20 +1,14 @@
-/**
- * Updated by trungquandev.com's author on August 17 2023
- * YouTube: https://youtube.com/@trungquandev
- * "A bit of fragrance clings to the hand that gives flowers!"
- */
+/* eslint-disable no-unused-vars */
 import { StatusCodes } from "http-status-codes";
-
+import ApiError from "~/utils/ApiError";
 const createNew = async (req, res, next) => {
   try {
-    console.log("This is Controller Board")
+    console.log("This is Controller Board");
     console.log("data body: ", req.body);
-    console.log("data query : ", req.query)
+    console.log("data query : ", req.query);
     res.status(StatusCodes.CREATED).json({ message: "POST FROM CONTROLLER ", Method: "post" });
   } catch (error) {
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-      error : error.message
-    })
+    next(error);
   }
-}
-export const boardController = { createNew }
+};
+export const boardController = { createNew };
