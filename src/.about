@@ -110,3 +110,4 @@
 +, /S: Xóa tất cả các tệp và thư mục con bên trong thư mục chỉ định.
 +, /Q: Xóa mà không yêu cầu xác nhận.
     => "clean": "rmdir /S /Q build && mkdir build",
+
