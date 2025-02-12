@@ -16,25 +16,34 @@ const BOARD_COLLECTION_SCHEMA = Joi.object({
   updatedAt : Joi.date().timestamp('javascript').default(null),
   _destroy : Joi.boolean().default(false)
 })
-const createBeforeCreate = async (data) => {
+const validationBeforeCreate = async (data) => {
   return await BOARD_COLLECTION_SCHEMA.validateAsync(data, { abortEarly : false })
 }
 const createNew = async (data) => {
   try {
-    console.log("Data : ", data);
+    console.log("4, This is Mobel Board!");
+    console.log("5, Data before validate : ", data);
     // validate sau khi create Board
-    const validate_board = await createBeforeCreate(data);
-    console.log("data before validate", validate_board);
+    const validate_board = await validationBeforeCreate(data);
+    console.log("6, Data after validate : ", validate_board);
     const createdBoard = await GET_DB().collection(BOARD_COLLECTION_NAME).insertOne(validate_board)
     return createdBoard
   } catch (error) {
     throw new Error(error)
   }
 }
+const get_board_detail = async (id) => {
+  try {
+    const response = await GET_DB().collection(BOARD_COLLECTION_NAME).findOne({
+      _id : new ObjectId(id)
+    });
+    return response
+  } catch (error) {
+    throw new Error(error)
+  }
+}
 const findOneById = async (id) => {
   try {
-    console.log("Id : " + id);
-
     // create board in mongoDB
     const response = await GET_DB().collection(BOARD_COLLECTION_NAME).findOne({
       _id : new ObjectId(id)
@@ -48,5 +57,6 @@ export const boardModel = {
   BOARD_COLLECTION_NAME,
   BOARD_COLLECTION_SCHEMA,
   createNew,
-  findOneById
+  findOneById,
+  get_board_detail
 }

@@ -6,7 +6,10 @@ const Router = express.Router(); // Tạo một instance của router
 
 Router.route("/")
   .get((req, res) => {
-    res.status(StatusCodes.OK).json({ message: "GET : Get Board", Method : "get" });
+    res
+      .status(StatusCodes.OK).json({ message: "GET : Get Board", Method: "get" });
   })
   .post(boardValidation.createNew, boardController.createNew);
+Router.route("/:id")
+  .get(boardController.get_board_detail)
 module.exports = Router;

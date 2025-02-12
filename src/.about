@@ -111,3 +111,5 @@
 +, /Q: Xóa mà không yêu cầu xác nhận.
     => "clean": "rmdir /S /Q build && mkdir build",
 
++, Axios là một thư viện JavaScript được sử dụng để thực hiện các yêu cầu HTTP từ trình duyệt cũng như từ 
+    NodeJs, Trong Express, bạn có thể sử dụng Axios để

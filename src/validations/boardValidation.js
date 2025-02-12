@@ -20,7 +20,7 @@ const schema = Joi.object({
 });
 const createNew = async (req, res, next) => {
   try {
-    console.log("This is Validation Board!");
+    console.log("1, This is Validation Board!");
     // abortEarly : trả về hết lỗi
     await schema.validateAsync(req.body, { abortEarly: false });
     next()
