@@ -113,3 +113,7 @@
 
 +, Axios là một thư viện JavaScript được sử dụng để thực hiện các yêu cầu HTTP từ trình duyệt cũng như từ 
     NodeJs, Trong Express, bạn có thể sử dụng Axios để
++, Cors (cross-Origin Rescourse Sharing) là một cơ chế trong trình duyệt cho phép hoặc từ chối các yêu cầu giữa
+    các miền khác nhau .
+    => Khi một trang web trên miền A cố gắng truy cập đến một miền B (Khác với miền A), Trình duyệt sẽ chặn
+    yêu cầu đó nếu miền B không cho phép.

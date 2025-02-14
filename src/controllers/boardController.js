@@ -28,7 +28,7 @@ const get_board_detail = async (req, res, next) => {
 
     // Điều hướng sang tầng service :
     const response = await boardService.get_board_detail(boardId);
-    console.log(response);
+    console.log("Data đã tìm bằng Id : ", response);
     res.status(StatusCodes.OK).json(response)
   } catch (error) {
     next(error)
