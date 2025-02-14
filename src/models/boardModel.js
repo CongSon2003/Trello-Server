@@ -8,6 +8,7 @@ const BOARD_COLLECTION_SCHEMA = Joi.object({
   title: Joi.string().required().min(3).max(50).trim().strict(),
   slug : Joi.string().trim().min(3).strict(),
   description: Joi.string().required().min(3).max(256).trim().strict(),
+  type : Joi.string().trim().valid("public", "private").default("public").required(),
 
   // item trong mảng columnOrderIds là ObjectId
   columnOrderIds : Joi.array().items(Joi.string().pattern(validator_ObjectId).message(validator_ObjectId_message)).default([]),
@@ -34,9 +35,14 @@ const createNew = async (data) => {
 }
 const get_board_detail = async (id) => {
   try {
-    const response = await GET_DB().collection(BOARD_COLLECTION_NAME).findOne({
-      _id : new ObjectId(id)
-    });
+    const response = await GET_DB().collection(BOARD_COLLECTION_NAME).aggregate([
+      { $match : { _id : new ObjectId(id), _destroy : false } }, // Lọc tài liều theo một điều kiện cho trước (id)
+      { $lookup : {
+        from : 'columns', // Tên bảng cần join
+        localField : 'columnOrderIds', // Trường trong bảng hiện tại
+        
+      } } // Tìm kiếm thông tin từ các bảng khác
+    ])
     return response
   } catch (error) {
     throw new Error(error)

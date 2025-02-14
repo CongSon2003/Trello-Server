@@ -16,8 +16,10 @@ const schema = Joi.object({
       "Title length must be less than or equal to 50 characters long",
     "string.trim": "Title must not have leading or trailing whitespace"
   }),
-  description: Joi.string().required().min(3).max(256).trim().strict()
+  description: Joi.string().required().min(3).max(256).trim().strict(),
+  type : Joi.string().trim().valid("public", "private").default("public").required()
 });
+
 const createNew = async (req, res, next) => {
   try {
     console.log("1, This is Validation Board!");
