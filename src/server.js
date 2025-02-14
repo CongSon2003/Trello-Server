@@ -10,8 +10,13 @@ import status from "~/routes/v1/index";
 import bodyParser from "body-parser";
 import { StatusCodes } from "http-status-codes";
 import { errorHandling } from "~/middlewares/errorHandling";
+import { corsOptions } from "~/config/cors";
+import cors from 'cors'
 const APP_SERVER = () => {
   const app = express();
+
+  // Cấu hình CORS cho server
+  app.use(cors(corsOptions));
 
   // parse application/x-www-form-urlencoded
   app.use(bodyParser.urlencoded({ extended: false }));
