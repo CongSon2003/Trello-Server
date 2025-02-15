@@ -2,7 +2,8 @@ import Joi from "joi";
 import { ObjectId } from "mongodb";
 import { GET_DB } from "~/config/mongodb";
 import { validator_ObjectId, validator_ObjectId_message } from "~/utils/validators";
-
+import { columnModel } from "./columnModel";
+import { cardModel } from "./cardModel";
 const BOARD_COLLECTION_NAME = 'boards'
 const BOARD_COLLECTION_SCHEMA = Joi.object({
   title: Joi.string().required().min(3).max(50).trim().strict(),
@@ -38,12 +39,19 @@ const get_board_detail = async (id) => {
     const response = await GET_DB().collection(BOARD_COLLECTION_NAME).aggregate([
       { $match : { _id : new ObjectId(id), _destroy : false } }, // Lọc tài liều theo một điều kiện cho trước (id)
       { $lookup : {
-        from : 'columns', // Tên bảng cần join
-        localField : 'columnOrderIds', // Trường trong bảng hiện tại
-        
-      } } // Tìm kiếm thông tin từ các bảng khác
-    ])
-    return response
+        from : columnModel.COLUMN_COLLECTION_NAME, // Tên bảng cần join
+        localField : '_id', // Trường trong bảng hiện tại
+        foreignField : 'boardId', // Trường trong bảng cần join
+        as : 'columns' // Tên của trường kết quả
+      } },
+      { $lookup : {
+        from : cardModel.CARD_COLLECTION_NAME, // Tên bảng cần join
+        localField : '_id', // Trường trong bảng hiện tại
+        foreignField : 'boardId', // Trường trong bảng cần join
+        as : 'cards' // Tên của trường kết quả
+      } }
+    ]).toArray()
+    return response[0] || {}
   } catch (error) {
     throw new Error(error)
   }
