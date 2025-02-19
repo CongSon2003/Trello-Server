@@ -10,7 +10,9 @@ const get_board_detail = (id) =>
       console.log("3, This is servise Board !");
       const response = await boardModel.get_board_detail(id);
       if (!response) {
-        throw new Error("Board not found!");
+        const error = new Error("Board not found");
+        error.statusCode = StatusCodes.NOT_FOUND;
+        throw error;
       }
       // Deep clone board tao ra 1 bản sao của board, không thay đổi board gốc
       // https://www.javascripttutorial.net/javascript-primitive-vs-reference-values/
