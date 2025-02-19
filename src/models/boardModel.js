@@ -51,7 +51,7 @@ const get_board_detail = async (id) => {
         as : 'cards' // Tên của trường kết quả
       } }
     ]).toArray()
-    return response[0] || {}
+    return response[0] || null
   } catch (error) {
     throw new Error(error)
   }
