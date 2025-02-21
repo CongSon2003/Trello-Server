@@ -3,6 +3,7 @@ import { WHITELIST_DOMAINS } from "~/utils/constants";
 // Cấu hình CORS cho server
 export const corsOptions = {
   origin : function (origin, callback) {
+    // origin là domain của request gửi lên server
     console.log("origin : ", origin);
     // Cho phép gọi Api bằng postman trên môi trường dev
     if (!origin && env.BUILD_MODE === "dev") {
