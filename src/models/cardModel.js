@@ -1,4 +1,6 @@
 import Joi from "joi";
+import { ObjectId } from "mongodb";
+import { GET_DB } from "~/config/mongodb";
 import {
   validator_ObjectId,
   validator_ObjectId_message
@@ -20,7 +22,42 @@ const CARD_COLLECTION_SCHEMA = Joi.object({
 
   _destroy: Joi.boolean().default(false)
 });
+const validationBeforeCreate = async (data) => {
+  return await CARD_COLLECTION_SCHEMA.validateAsync(data, { abortEarly : true })
+}
+const createNew = async (data) => {
+  try {
+    console.log("4. This is columnModel!");
+    console.log("5. Validate data before creation : ", data);
+    const validate_card = await validationBeforeCreate(data);
+    const newCard = {
+      ...validate_card,
+      boardId : new ObjectId(validate_card.boardId),
+      columnId : new ObjectId(validate_card.columnId)
+    }
+    console.log("6. Data after authentication : ", validate_card);
+    const create_card = await GET_DB().collection(CARD_COLLECTION_NAME).insertOne(newCard);
+    return create_card
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+const findOneById = async (id) => {
+  try {
+    // create board in mongoDB
+    const response = await GET_DB()
+      .collection(CARD_COLLECTION_NAME)
+      .findOne({
+        _id: new ObjectId(id)
+      });
+    return response;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
 export const cardModel = {
   CARD_COLLECTION_NAME,
-  CARD_COLLECTION_SCHEMA
+  CARD_COLLECTION_SCHEMA,
+  createNew,
+  findOneById
 };
