@@ -7,6 +7,7 @@ import {
 } from "~/utils/validators";
 import { columnModel } from "./columnModel";
 import { cardModel } from "./cardModel";
+const NOT_ALLOWED_UPDATE_FIELDS = ['_id', 'createdAt'];
 const BOARD_COLLECTION_NAME = "boards";
 const BOARD_COLLECTION_SCHEMA = Joi.object({
   title: Joi.string().required().min(3).max(50).trim().strict(),
@@ -83,6 +84,27 @@ const get_board_detail = async (id) => {
     throw new Error(error);
   }
 };
+const updateBoard = async (boardId, updateData) => {
+  try {
+    console.log("This is Mobel Board!");
+    console.log(updateData);
+    // Lọc những field mà chúng ta không cho phép cập nhật :
+    Object.keys(updateData).forEach(field => {
+      if (NOT_ALLOWED_UPDATE_FIELDS.includes(field)) {
+        delete updateData[field]
+      }
+    });
+    console.log(updateData);
+    const response = await GET_DB().collection(BOARD_COLLECTION_NAME).findOneAndUpdate(
+      { _id: new ObjectId(boardId) }, // Điều kiện tìm kiếm
+      { $set: updateData }, // Cập nhật
+      { returnDocument: 'after' } // Tùy chọn để trả về tài liệu sau khi cập nhật
+    );
+    return response.value
+  } catch (error) {
+    throw new Error(error)
+  }
+}
 const findOneById = async (id) => {
   try {
     // create board in mongoDB
@@ -116,5 +138,6 @@ export const boardModel = {
   createNew,
   findOneById,
   get_board_detail,
-  pushColumnOrderIds
+  pushColumnOrderIds,
+  updateBoard
 };

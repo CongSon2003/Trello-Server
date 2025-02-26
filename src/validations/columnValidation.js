@@ -28,4 +28,19 @@ const createNew = async (req, res, next) => {
     next({ message: messageError, statusCode });
   }
 }
-export const columnValidation = { createNew }
+const updateNew = async (req, res, next) => {
+  const schema_update = Joi.object({
+    title : Joi.string().min(3).max(50).trim().strict(),
+    cardOrderedIds : Joi.array().items(
+      Joi.string().pattern(validator_ObjectId).message(validator_ObjectId_message)).default([]),
+    boardId: Joi.string().pattern(validator_ObjectId).message(validator_ObjectId_message)
+  })
+  try {
+    console.log("1. Verify customer submitted data!");
+    await schema_update.validateAsync(req.body, { abortEarly : true, allowUnknown : true })
+    next();
+  } catch (error) {
+    next(error)
+  }
+}
+export const columnValidation = { createNew, updateNew }

@@ -35,4 +35,22 @@ const get_board_detail = async (req, res, next) => {
     next(error);
   }
 };
-export const boardController = { createNew, get_board_detail };
+const updateBoard = async (req, res, next) => {
+  try {
+    console.log("1, This is Controller of updateBoard : fisrt ");
+    const boardId = req.params.id;
+    console.log("Data được gửi để update : ", req.body);
+    // Điều hướng sang tầng servise :
+    const response_Servise = await boardService.updateBoard(boardId, req.body)
+    if (!response_Servise) {
+      const err = new Error("BAD REQUEST")
+      err.status = StatusCodes.BAD_REQUEST;
+      next(err)
+    }
+    console.log("3, This is Controller of get_board_detail : Second");
+    res.status(StatusCodes.OK).json(response_Servise);
+  } catch (error) {
+    next(error)
+  }
+}
+export const boardController = { createNew, get_board_detail, updateBoard };

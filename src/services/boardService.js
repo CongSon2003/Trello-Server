@@ -27,30 +27,44 @@ const get_board_detail = (id) =>
       reject(error);
     }
   });
-const createNew = (body) =>
-  new Promise(async (resolve, reject) => {
-    try {
-      // Đây là tầng xử lý dữ liệu của dự án
-      console.log("3, This is servise Board !");
+const createNew = (body) => new Promise(async (resolve, reject) => {
+  try {
+    // Đây là tầng xử lý dữ liệu của dự án
+    console.log("3, This is servise Board !");
 
-      // Gọi tới model DB create Board
-      const response = await boardModel.createNew({
-        ...body,
-        slug: formatter_slugify(body.title)
+    // Gọi tới model DB create Board
+    const response = await boardModel.createNew({
+      ...body,
+      slug: formatter_slugify(body.title)
+    });
+
+    // Tìm Board sau khi create nếu không có thì return lỗi
+    const result = await boardModel.findOneById(response.insertedId);
+    if (!result) {
+      resolve({
+        statusCode: StatusCodes.NOT_FOUND,
+        message: "Error Created",
+        error: 1
       });
-
-      // Tìm Board sau khi create nếu không có thì return lỗi
-      const result = await boardModel.findOneById(response.insertedId);
-      if (!result) {
-        resolve({
-          statusCode: StatusCodes.NOT_FOUND,
-          message: "Error Created",
-          error: 1
-        });
-      }
-      resolve(result);
-    } catch (error) {
-      reject(error);
     }
-  });
-export const boardService = { createNew, get_board_detail };
+    resolve(result);
+  } catch (error) {
+    reject(error);
+  }
+});
+const updateBoard = (boardId, body) => new Promise(async (resolve, reject) => {
+  try {
+    // Đây là tầng xử lý dữ liệu của dự án
+    console.log("2, This is servise Board !");
+    const updateData = {
+      ...body,
+      updatedAt : Date.now()
+    }
+    // Gọi tới model DB update Board
+    const response_Model = await boardModel.updateBoard(boardId, updateData);
+    resolve(response_Model)
+  } catch (error) {
+    reject(error)
+  }
+})
+export const boardService = { createNew, get_board_detail, updateBoard };

@@ -44,6 +44,20 @@ const createNew = async (data) => {
     throw new Error(error);
   }
 }
+const updateNew = async (columnId, data) => {
+  try {
+    console.log("4, This is columnModel");
+    console.log(columnId, data);
+    const response = await GET_DB().collection(COLUMN_COLLECTION_NAME).findOneAndUpdate(
+      { _id : new ObjectId(columnId) },
+      { $set : data },
+      { ReturnDocument : true }
+    )
+    return response.value
+  } catch (error) {
+    throw new Error(error)
+  }
+}
 // Push cardId vào cuối mạng cardOrderIds của column
 const pushColumnOrderIds = async (card) => {
   try {
@@ -76,5 +90,6 @@ export const columnModel = {
   COLUMN_COLLECTION_SCHEMA,
   createNew,
   findOneById,
-  pushColumnOrderIds
+  pushColumnOrderIds,
+  updateNew
 };

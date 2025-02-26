@@ -23,4 +23,19 @@ const createNew = (body) => new Promise( async (resolve, reject) => {
     reject(error);
   }
 });
-export const columnService = { createNew };
+const updateNew = (columnId, body) => new Promise(async (resolve, reject) => {
+  try {
+    // Đây là tầng xử lý dữ liệu của dự án
+    console.log("3. This is columnService!");
+    const update_column_data = {
+      ...body,
+      updatedAt : Date.now()
+    }
+    // Gọi tới model DB update Column
+    const response_Model = await columnModel.updateNew(columnId, update_column_data)
+    resolve(response_Model)
+  } catch (error) {
+    reject(error)
+  }
+})
+export const columnService = { createNew, updateNew };

@@ -7,4 +7,5 @@ const Router = express.Router(); // Tạo một instance của router
 Router.route("/").get((req, res) => {
   res.status(StatusCodes.OK).json({ message: "GET : Get Column", Method: "get" });
 }).post(columnValidation.createNew, columnController.createNew);
+Router.route("/:id").put(columnValidation.updateNew, columnController.updateNew)
 module.exports = Router;

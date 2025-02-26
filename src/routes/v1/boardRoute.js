@@ -11,5 +11,5 @@ Router.route("/")
       .json({ message: "GET : Get Board", Method: "get" });
   })
   .post(boardValidation.createNew, boardController.createNew);
-Router.route("/:id").get(boardController.get_board_detail);
+Router.route("/:id").get(boardController.get_board_detail).put(boardValidation.updateNew, boardController.updateBoard);
 module.exports = Router;
